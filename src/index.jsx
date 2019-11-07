@@ -1,3 +1,4 @@
+/* eslint no-alert: off */
 // external modules
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -9,6 +10,13 @@ import App from './components/app';
 import '../assets/stylesheets/application.scss';
 
 // State and reducers
+const initialState = {
+  // TODO
+  messages: [],
+  channels: ['general', 'react', 'paris'],
+  selectedChannel: 'general',
+  currentUsername: prompt('What is your username?') || `anonymus${Math.floor(10 + (Math.random() * 90))}`
+};
 const reducers = combineReducers({
   changeMe: (state = null, action) => state
 });
