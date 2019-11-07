@@ -7,6 +7,7 @@ import Message from '../components/message';
 const MessageList = (props) => {
   return (
     <div className="message-list">
+      <p className="title">Channel</p>
       {props.messages.map(message => <Message message={message} key={message.created_at} />)}
     </div>
   );
