@@ -2,6 +2,29 @@ body {
   font-family: Helvetica;
 }
 .app {
-  margin-top: 20px;
-  margin-bottom: 20px;
+  height: 820px;
+  display: flex;
+  .logo {
+    width: 10%;
+    background-color: #1F6650;
+    color: white;// #EA5E5E for message content
+    margin: 0;
+    padding: 10px;
+  }
+  .channel-list {
+    width: 20%;
+    background-color: #6F9A8D;
+    color: white;
+    margin: 0;
+    padding: 10px;
+  }
+  .message-list {
+    width: 70%;
+    background-color: #EAFBEA;
+    padding: 10px;
+  }
+}
+
+.title {
+  font-weight: bold;
 }
