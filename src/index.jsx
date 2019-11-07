@@ -10,6 +10,11 @@ import App from './components/app';
 import '../assets/stylesheets/application.scss';
 
 // State and reducers
+import MessagesReducer from './reducers/messages_reducer';
+import ChannelsReducer from './reducers/channels_reducer';
+import SelectedChannelReducer from './reducers/selected_channel_reducer';
+import CurrentUsernameReducer from './reducers/current_username_reducer';
+
 const initialState = {
   // TODO
   messages: [],
@@ -18,7 +23,10 @@ const initialState = {
   currentUsername: prompt('What is your username?') || `anonymus${Math.floor(10 + (Math.random() * 90))}`
 };
 const reducers = combineReducers({
-  changeMe: (state = null, action) => state
+  messages: MessagesReducer,
+  channels: ChannelsReducer,
+  selectedChannel: SelectedChannelReducer,
+  currentUsername: CurrentUsernameReducer
 });
 
 // render an instance of the component in the DOM
