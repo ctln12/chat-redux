@@ -12,10 +12,10 @@ import App from './components/app';
 import '../assets/stylesheets/application.scss';
 
 // State and reducers
-import MessagesReducer from './reducers/messages_reducer';
-import ChannelsReducer from './reducers/channels_reducer';
-import SelectedChannelReducer from './reducers/selected_channel_reducer';
-import CurrentUsernameReducer from './reducers/current_username_reducer';
+import messagesReducer from './reducers/messages_reducer';
+import selectedChannelReducer from './reducers/selected_channel_reducer';
+
+const identityReducer = (state = null) => state;
 
 const initialState = {
   // TODO
@@ -25,19 +25,22 @@ const initialState = {
   currentUsername: prompt('What is your username?') || `anonymous${Math.floor(10 + (Math.random() * 90))}`
 };
 const reducers = combineReducers({
-  messages: MessagesReducer,
-  channels: ChannelsReducer,
-  selectedChannel: SelectedChannelReducer,
-  currentUsername: CurrentUsernameReducer
+  messages: messagesReducer,
+  channels: identityReducer,
+  selectedChannel: selectedChannelReducer,
+  currentUsername: identityReducer
 });
+
 /* eslint-disable no-underscore-dangle */
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 /* eslint-enable */
+
+// Middlewares
 const middlewares = composeEnhancers(applyMiddleware(reduxPromise, logger));
 
 // render an instance of the component in the DOM
 ReactDOM.render(
-  <Provider store={createStore(reducers, {}, middlewares)}>
+  <Provider store={createStore(reducers, initialState, middlewares)}>
     <App />
   </Provider>,
   document.getElementById('root')
