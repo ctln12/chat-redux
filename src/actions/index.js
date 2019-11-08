@@ -28,8 +28,9 @@ export function createMessage(channel, author, content) {
   };
 }
 
-export function setSelectedChannel() {
+export function selectChannel(channel) {
   return {
-    type: 'SELECTED_CHANNEL'
+    type: 'CHANNEL_SELECTED',
+    payload: channel
   };
 }
