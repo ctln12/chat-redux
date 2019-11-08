@@ -26,23 +26,16 @@ class MessageForm extends Component {
 
   render() {
     return (
-      <form className="form-inline" onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} className="channel-editor">
         <input
           ref={(input) => { this.messageBox = input; }}
           type="text"
-          className="form-control mb-2 mr-sm-2"
+          className="form-control"
           autoComplete="off"
           value={this.state.value}
           onChange={this.handleChange}
-          placeholder="Write a message"
-          style={{ width: '94%' }}
         />
-        <button
-          type="submit"
-          className="btn btn-danger mb-2"
-        >
-          Send
-        </button>
+        <button type="submit">Send</button>
       </form>
     );
   }
