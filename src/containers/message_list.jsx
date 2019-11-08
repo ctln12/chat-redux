@@ -2,35 +2,42 @@ import React, { Component } from 'react';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { setMessages } from '../actions';
 
+import { setMessages } from '../actions';
 import Message from '../components/message';
 import MessageForm from './message_form';
 
 class MessageList extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = { intervalID: '' };
-  }
   componentWillMount() {
-    this.props.setMessages();
+    this.setMessages();
   }
 
   componentDidMount() {
-    setInterval(() => this.props.setMessages(), 10000);
+    this.refresher = setInterval(this.setMessages, 5000);
+  }
+
+  componentDidUpdate() {
+    this.list.scrollTop = this.list.scrollHeight;
   }
 
   componentWillUnmount() {
-    clearInterval();
+    clearInterval(this.refresher);
+  }
+
+  setMessages = () => {
+    this.props.setMessages(this.props.selectedChannel);
   }
 
   render() {
     return (
       <div className="message-list">
-        <p className="title">Channel</p>
-        <div className="messages-window">
-          {this.props.messages.map(message => <Message message={message} key={message.created_at} />)}
+        <p className="title">Channel #{this.props.selectedChannel}</p>
+        <div className="messages-window" ref={(list) => { this.list = list; }}>
+          {
+            this.props.messages.map((message) => {
+              return <Message message={message} key={message.id} />;
+            })
+          }
         </div>
         <MessageForm />
       </div>
@@ -47,7 +54,8 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   return {
-    messages: state.messages
+    messages: state.messages,
+    selectedChannel: state.selectedChannel
   };
 }
 
