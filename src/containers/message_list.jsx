@@ -8,8 +8,21 @@ import Message from '../components/message';
 import MessageForm from './message_form';
 
 class MessageList extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { intervalID: '' };
+  }
   componentWillMount() {
     this.props.setMessages();
+  }
+
+  componentDidMount() {
+    setInterval(() => this.props.setMessages(), 10000);
+  }
+
+  componentWillUnmount() {
+    clearInterval();
   }
 
   render() {
