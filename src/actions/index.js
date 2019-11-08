@@ -7,3 +7,23 @@ export function setMessages() {
     payload: promise
   };
 }
+
+export function createMessage(channel, author, content) {
+  // TODO
+  const body = { author, content };
+  fetch(`https://wagon-chat.herokuapp.com/${channel}/messages`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+  }).then(r => r.json());
+
+  const newMessageList = setMessages();
+
+  return {
+    type: 'CREATE_MESSAGE',
+    payload: newMessageList.payload
+  };
+}
