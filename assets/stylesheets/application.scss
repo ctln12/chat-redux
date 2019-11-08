@@ -2,7 +2,7 @@ body {
   font-family: Helvetica;
 }
 .app {
-  height: 820px;
+  min-height: 100vh;
   display: flex;
   .logo {
     width: 10%;
@@ -30,5 +30,5 @@ body {
 }
 
 .messages-window {
-  height: calc(100vh - 85px);
+  min-height: calc(100vh - 85px);
 }
