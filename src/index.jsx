@@ -3,7 +3,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { logger } from 'redux-logger';
+import reduxPromise from 'redux-promise';
 
 // internal modules
 import App from './components/app';
@@ -28,10 +30,11 @@ const reducers = combineReducers({
   selectedChannel: SelectedChannelReducer,
   currentUsername: CurrentUsernameReducer
 });
+const middlewares = applyMiddleware(reduxPromise, logger);
 
 // render an instance of the component in the DOM
 ReactDOM.render(
-  <Provider store={createStore(reducers)}>
+  <Provider store={createStore(reducers, {}, middlewares)}>
     <App />
   </Provider>,
   document.getElementById('root')
