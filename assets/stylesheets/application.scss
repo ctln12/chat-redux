@@ -28,3 +28,7 @@ body {
 .title {
   font-weight: bold;
 }
+
+.messages-window {
+  height: calc(100vh - 85px);
+}
