@@ -11,9 +11,9 @@ export function setMessages(channel) {
 }
 
 export function createMessage(channel, author, content) {
-  // TODO
-  const body = { author, content };
-  fetch(`https://wagon-chat.herokuapp.com/${channel}/messages`, {
+  const url = `${BASE_URL}/${channel}/messages`;
+  const body = { author, content }; // ES6 destructuring
+  const promise = fetch(url, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
@@ -22,18 +22,9 @@ export function createMessage(channel, author, content) {
     body: JSON.stringify(body)
   }).then(r => r.json());
 
-  const newMessageList = setMessages();
-
   return {
-    type: 'CREATE_MESSAGE',
-    payload: newMessageList.payload
-  };
-}
-
-export function setChannels(channels) {
-  return {
-    type: 'SET_CHANNELS',
-    payload: channels
+    type: 'MESSAGE_POSTED',
+    payload: promise // will be resolved by redux-promise
   };
 }
 
