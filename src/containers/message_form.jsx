@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-// import { bindActionCreators } from 'redux';
-// import { connect } from 'react-redux';
-// import { setMessages } from '../actions';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { createMessage } from '../actions';
 
 class MessageForm extends Component {
   constructor(props) {
@@ -18,8 +18,9 @@ class MessageForm extends Component {
   }
 
   handleSubmit(event) {
-    console.log(`A name was submitted: ${this.state.value}`);
     event.preventDefault();
+    this.props.createMessage('general', 'Alice', this.state.value);
+    this.setState({ value: '' });
   }
 
   render() {
@@ -32,18 +33,17 @@ class MessageForm extends Component {
   }
 }
 
-// function mapDispatchToProps(dispatch) {
-//   return bindActionCreators(
-//     { setMessages },
-//     dispatch
-//   );
-// }
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(
+    { createMessage },
+    dispatch
+  );
+}
 
-// function mapStateToProps(state) {
-//   return {
-//     messages: state.messages
-//   };
-// }
+function mapStateToProps(state) {
+  return {
+    messages: state.messages
+  };
+}
 
-// export default connect(mapStateToProps, mapDispatchToProps)(MessageList);
-export default MessageForm;
+export default connect(mapStateToProps, mapDispatchToProps)(MessageForm);
