@@ -30,7 +30,7 @@ class ChannelList extends Component {
 
   render() {
     return (
-      <div className="channel-list">
+      <div className="channels-container">
         <p className="title">Redux Chat</p>
         <ul>
           {this.props.channels.map(this.renderChannel)}

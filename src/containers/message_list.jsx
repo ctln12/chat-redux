@@ -30,7 +30,7 @@ class MessageList extends Component {
 
   render() {
     return (
-      <div className="message-list">
+      <div className="messages-container">
         <p className="title">Channel #{this.props.selectedChannel}</p>
         <div className="messages-window" ref={(list) => { this.list = list; }}>
           {
