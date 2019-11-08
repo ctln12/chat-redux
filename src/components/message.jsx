@@ -1,17 +1,14 @@
 import React from 'react';
 
-import { emojify } from 'react-emojione';
-
 const Message = (props) => {
   const { created_at, author, content } = props.message;
-  const time = new Date(created_at).toLocaleTimeString();
   return (
     <div className="message-container" id={props.id}>
-      <i>
+      <p>
         <span>{author}</span>
-        <small>{time}</small>
-      </i>
-      <p>{emojify(content)}</p>
+        <small>{created_at}</small>
+      </p>
+      <p>{content}</p>
     </div>
   );
 };
