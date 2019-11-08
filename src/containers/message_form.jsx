@@ -8,26 +8,41 @@ class MessageForm extends Component {
   constructor(props) {
     super(props);
     this.state = { value: '' };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
+  componentDidMount() {
+    this.messageBox.focus();
+  }
+
+  handleChange = (event) => {
     this.setState({ value: event.target.value });
   }
 
-  handleSubmit(event) {
+  handleSubmit = (event) => {
     event.preventDefault();
-    this.props.createMessage('general', 'Alice', this.state.value);
+    this.props.createMessage(this.props.selectedChannel, this.props.currentUser, this.state.value);
     this.setState({ value: '' });
   }
 
   render() {
     return (
       <form className="form-inline" onSubmit={this.handleSubmit}>
-        <input type="text" className="form-control mb-2 mr-sm-2" id="message-form-input" placeholder="Write a message" value={this.state.value} onChange={this.handleChange} style={{ width: '94%' }} />
-        <button type="submit" className="btn btn-danger mb-2">Send</button>
+        <input
+          ref={(input) => { this.messageBox = input; }}
+          type="text"
+          className="form-control mb-2 mr-sm-2"
+          autoComplete="off"
+          value={this.state.value}
+          onChange={this.handleChange}
+          placeholder="Write a message"
+          style={{ width: '94%' }}
+        />
+        <button
+          type="submit"
+          className="btn btn-danger mb-2"
+        >
+          Send
+        </button>
       </form>
     );
   }
@@ -42,7 +57,8 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   return {
-    messages: state.messages
+    currentUser: state.currentUser,
+    selectedChannel: state.selectedChannel
   };
 }
 
